@@ -21,8 +21,16 @@ module.exports = {
     var itemName = req.body.item;
     var itemLocation = req.body.LatLng;
     var date = req.body.createdAt;
+    var uuid = req.body.uuid;
+    var author = req.user.username;
     var create;
+    var pictureData = req.body.picture;
 
+    // fs.writefile("./test.text",pictureData, function (err,data,string){
+    //     console.log(err);
+    //     console.log(data);
+    // })
+    //console.log(typeof pictureData)
     //The below line returns promisified version of Item.findOne bound to context Item
     //This is necessary because we will only create a new model after we search the db to see if it already exists
     var findOne = Q.nbind(Item.findOne, Item);
@@ -46,7 +54,10 @@ module.exports = {
             itemLocation: itemLocation,
             itemLng: itemLocation.lng,
             itemLat: itemLocation.lat,
-            createdAt: date
+            createdAt: date,
+            picture : pictureData,
+            uuid: uuid,
+            createdBy: author
           };
 
           // In mongoose, .create() automaticaly creates AND saves simultaneously
@@ -83,22 +94,42 @@ module.exports = {
       });
   },
   removeItem: function(req, res){
-    var itemName = req.body.item;
-    var itemLocation = req.body.LatLng;
+    console.log("called removeItem lmao");
+    var uuid = req.body.uuid;
+    var user = req.user.username;
+    var bool = false;
 
     var removeItem = Q.nbind(Item.remove, Item);
-    removeItem({itemName: itemName, itemLng: itemLocation.lng, itemLat: itemLocation.lat})
-      .then(function(item){
-
-        //If the item already exists, throws an error
-        if (!item){
-          res.status(400).send('invalid request, item does not exist');
+    var findOne = Q.nbind(Item.findOne, Item);
+    findOne({'uuid': uuid})
+      .then(function(item) {
+        if(item.createdBy !== user) {
+          console.log("not the same person that made the item");
+          console.log("author:", item.createdBy);
+          console.log("requester:", user);
+          res.json({success: false, message: 'You have to have be the author to remove this item!'});
         } else {
-          res.send('item deleted');
+          console.log("it was a legit user!")
+          bool = true;
         }
       })
-      .catch(function(err){
-        console.log('Error when removeItem invoked - deleting row from db failed. Error: ', err);
+      .then(function() {
+        console.log("the bool is", bool);
+        if(bool) {
+          console.log("got into here");
+          removeItem({'uuid': uuid})
+            .then(function(item){
+              //If the item already exists, throws an error
+              if (!item){
+                res.status(400).send('invalid request, item does not exist');
+              } else {
+                res.send('item deleted');
+              }
+            })
+            .catch(function(err){
+              console.log('Error when removeItem invoked - deleting row from db failed. Error: ', err);
+            });
+        }
       });
   }
 };
