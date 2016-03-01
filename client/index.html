@@ -25,43 +25,42 @@
       <button ng-click="playPause()">Play/Pause</button>
     </div>
     <nav class="navbar-fixed">
-     <div id="headerSection" class="container-fluid">
-      <ul>
-        <li><img id="beeIcon" src="./assets/kanye/boost.png"></li>
-        <li><a href="#" id="logoTitle">Yeezy Freebees</a></li>
-        <li><p>Find free YEEZYS around you!<p></li>
-        <li class="rightFloat"><a href="#inputSection" class="anchor">Giver</a></li>
-        <li class="rightFloat"><a href="#" class="anchor">Forager</a></li>
-      </ul>
-      <div id="searchInput">
-        <form novalidate>
-          <input id="searchBox" placeholder="Search for an item" type="text" ng-model="search.input">
-          <button class="yellowButton" id="searchBtn" ng-click="filterMap()" type="submit"><a href="#">Search</a></button>
-        </form>
-
+      <div id="headerSection" class="container-fluid">
+        <ul>
+          <li><img id="beeIcon" src="./assets/kanye/boost.png"></li>
+          <li><a href="#" id="logoTitle">Yeezy Freebees</a></li>
+          <li><p>Find free YEEZYS around you!<p></li>
+          <li class="rightFloat"><a href="#inputSection" class="anchor">Giver</a></li>
+          <li class="rightFloat"><a href="#" class="anchor">Forager</a></li>
+        </ul>
+        <div id="searchInput">
+          <form novalidate>
+            <input id="searchBox" placeholder="Search for an item" type="text" ng-model="search.input">
+            <button class="yellowButton" id="searchBtn" ng-click="filterMap()" type="submit"><a href="#">Search</a></button>
+          </form>
+        </div>
       </div>
-     </div>
-
     </nav>
     <div id="map" scrollwheel= 'false'></div>
     <div id="inputSection">
       <div id="inputForm">
         <form novalidate >
           <h2>Want to give away some YEEZYS?</h2><br>
-          <a class="rightFloat" href ="#openModal"> Login/Signup </a><li>
+          <h2><a class="rightFloat" href ="#openModal"> Login/Signup </a></h2>
           <div id = "openModal" class = "modalDialog">
             <div>
-          <a href = "#close" tittle = "close" class="close">x</a>
-          <ul ng-controller="AuthController">
-        <li class=""><input type="text" placeholder="username" ng-model="user.username"></li>
-        <li class=""><input type="text" placeholder="password" ng-model="user.password"></li>
-        <li class=""><a class="anchor" ng-click="login()">Login</a></li>
-        <li class=""><a class="anchor" ng-click="signup()">Signup</a></li>
-        <li class=""><a class="anchor" ng-click="logout()">Logout</a></li>
-        </ul>
+              <a href = "#close" tittle = "close" class="close">x</a>
+              <ul ng-controller="AuthController">
+                <li class="signIn"><input type="text" placeholder="username" ng-model="user.username"></li>
+                <li class="signIn"><input type="text" placeholder="password" ng-model="user.password"></li>
+                <div class="">
+                  <a class="anchor" ng-click="login()">Login</a>
+                  <a class="anchor" ng-click="signup()">Signup</a>
+                  <a class="anchor" ng-click="logout()">Logout</a>
+                </div>
+              </ul>
             </div>
           </div>
-
           <button id="fillIp" type="submit" ng-click="ip()">Or use current location</button>
           <br>
           <input placeholder="Your yeezys" type="text" ng-model="user.item">
@@ -69,20 +68,20 @@
           <br>
           <input type="file" id="fileInput" class="yellowButton"></input><br>
           <div class="spinner"><img src="loading.gif"></div><br><br>
-            <button class="yellowButton submitForm" type="submit" ng-click="sendPost()" >
-              <a href="#">Submit </a>
-            </button>
+          <button class="yellowButton submitForm" type="submit" ng-click="sendPost()" >
+          <a href="#">Submit </a>
+          </button>
         </form>
       </div>
     </div>
     <div id="footerSection">
       <div>Visit the <a target="_blank" href="https://github.com/forinlanguages/Freebees/">repo</a>!</div>
       <br>
-        <span>By Kanye West. With help from Redcoat, Yankee & G.I Joe (Real American Hero)</span>
-        <br></br>
-        <div id="bottomCopyright">
-          &copy;Yo, Taylor, I'm really happy for you, I'ma let you finish, but Beyoncé had one of the best videos of all time! One of the best videos of all time!
-        </div>
+      <span>By Kanye West. With help from Redcoat, Yankee & G.I Joe (Real American Hero)</span>
+      <br></br>
+      <div id="bottomCopyright">
+        &copy;Yo, Taylor, I'm really happy for you, I'ma let you finish, but Beyoncé had one of the best videos of all time! One of the best videos of all time!
+      </div>
     </div>
     <img class="shoe" src="./assets/kanye/boost.png">
   </body>
