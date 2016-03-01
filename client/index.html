@@ -16,13 +16,16 @@
   </head>
   <body id="#" ng-app="myApp" ng-controller="FormController">
     <div class='musicContainer' plangular="https://soundcloud.com/kanyewest/nomorepartiesinlamix1-clean">
-      <small>{{ currentTime | hhmmss }} | {{ duration | hhmmss }}</small>
-      <progress
-        ng-click="seek($event)"
-        ng-value="currentTime / duration">
-        {{ currentTime / duration }}
-      </progress>
-      <button ng-click="playPause()">Play/Pause</button>
+      <img ng-src="{{ track.artwork_url  }}" alt="{{ track.title }}" />
+      <span class='subMusic'>
+        <small>{{ currentTime | hhmmss }} | {{ duration | hhmmss }}</small>
+        <progress
+          ng-click="seek($event)"
+          ng-value="currentTime / duration">
+          {{ currentTime / duration }}
+        </progress>
+        <button ng-click="playPause()">Play/Pause</button>
+      </span>
     </div>
     <nav class="navbar-fixed">
       <div id="headerSection" class="container-fluid">

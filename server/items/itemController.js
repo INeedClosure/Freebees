@@ -94,6 +94,7 @@ module.exports = {
       });
   },
   removeItem: function(req, res){
+    console.log("called removeItem lmao");
     var uuid = req.body.uuid;
     var user = req.user.username;
     var bool = false;
@@ -103,25 +104,33 @@ module.exports = {
     findOne({'uuid': uuid})
       .then(function(item) {
         if(item.createdBy !== user) {
+          console.log("not the same person that made the item");
+          console.log("author:", item.createdBy);
+          console.log("requester:", user);
           res.json({success: false, message: 'You have to have be the author to remove this item!'});
         } else {
+          console.log("it was a legit user!")
           bool = true;
         }
+      })
+      .then(function() {
+        console.log("the bool is", bool);
+        if(bool) {
+          console.log("got into here");
+          removeItem({'uuid': uuid})
+            .then(function(item){
+              //If the item already exists, throws an error
+              if (!item){
+                res.status(400).send('invalid request, item does not exist');
+              } else {
+                res.send('item deleted');
+              }
+            })
+            .catch(function(err){
+              console.log('Error when removeItem invoked - deleting row from db failed. Error: ', err);
+            });
+        }
       });
-    if(bool) {
-      removeItem({'uuid': uuid})
-        .then(function(item){
-          //If the item already exists, throws an error
-          if (!item){
-            res.status(400).send('invalid request, item does not exist');
-          } else {
-            res.send('item deleted');
-          }
-        })
-        .catch(function(err){
-          console.log('Error when removeItem invoked - deleting row from db failed. Error: ', err);
-        });
-    }
   }
 };
 

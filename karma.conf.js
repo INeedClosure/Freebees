@@ -57,8 +57,6 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
 
 
-
-
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
 
@@ -85,7 +83,7 @@ module.exports = function(config) {
         'karma-mocha',
         'karma-chai',
         'karma-chrome-launcher',
-        'karma-jasmine',
+        'karma-jasmine'
     ]
   })
 }
