@@ -357,13 +357,16 @@ span a {
 }
 
 .musicContainer {
-  background-color: #797570;
   width: 20%;
   display: block;
   position: fixed;
   margin-left: auto;
   margin-right: auto;
   bottom: 0;
+}
+
+.subMusic {
+  background-color: #797570;
 }
 
 .modalDialog {
