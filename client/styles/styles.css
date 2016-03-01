@@ -389,6 +389,7 @@ span a {
 
 .modalDialog > div {
   width: 400px;
+  height: 175px;
   position: relative;
   margin: 10% auto;
   padding: 5px 20px 13px 20px;
@@ -397,4 +398,11 @@ span a {
   background: -moz-linear-gradient(#fff, #999);
   background: -webkit-linear-gradient(#fff, #999);
   background: -o-linear-gradient(#fff, #999);
+}
+.modalDialog > div > ul {
+  list-style-type: none;
+}
+
+.modalDialog > div > ul > li {
+  width: 100%;
 }
